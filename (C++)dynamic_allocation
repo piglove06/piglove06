@@ -1,0 +1,33 @@
+/*
+15.10.12
+c++ 동적할당
+16:05분 코딩시작  16분끝
+
+1. cout << "\t" << a[i];   로 했어야됬는데    a[i] 대신에 i를 넣어버리는 오류를 발견하느라 시간이 좀더 걸렸고
+2. c언어쪽에 할당해제(free) 오류를 지금발견하여 시간이 좀 더 걸렸습니다.
+*/
+
+#include<iostream>
+using namespace std;
+
+int mian() {
+
+	int *a;
+	int length;
+	cout << "동적할당 배열길이 입력하세요 ";
+	cin >> length;
+	a = new int[length];
+	
+
+
+
+	for (int i = length - 1; i >= 0; i--) {
+		a[i] = i;
+		if (i == length) {
+			cout << "배열값은 ";	
+
+		}
+		cout << "\t" << a[i];
+	}
+	free(a);
+}
