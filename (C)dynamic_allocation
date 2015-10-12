@@ -1,0 +1,40 @@
+/*
+15.10.12 
+c 동적할당
+15:43분 코딩시작  57분 끝
+
+1. c언어에서 동적할당 사용법 배운지가 오래되서 책보고 다시한번 간단한거 연습해봤습니다.
+2. 하는방법 체크해두고 다음에 링크드리스트까지는 못하더라도 응용해서 사용해보려고 합니다.
+3. stdlib.h 헤더파일을 사용합니다.(malloc)
+4. C랑 C++이랑 둘다 만들어보려고 합니다.
+5. scanf_s로 바뀌었고 특별히 어려운점보다는 기억이 안나서 책보면서 만들었습니다.
+6. 책에는 메모리해제가 delete []a; 로 나와있었는데 오류나서 검색해보니 free(a); 로 확인했고 비주얼스튜디오 버전이 달라서 그런것으로 예상됩니다.
+*/
+
+#include<stdio.h>
+#include <stdlib.h>
+
+
+
+
+int main() {
+	int *a;		//c언어때 malloc 사용, 동적할당 변수선언시 포인터로 한다.
+
+	int length;
+	printf("동적할당 배열길이 입력하세요 ");
+	scanf_s("%d", &length);
+
+	a = (int*)malloc(sizeof(int) * length);		//변수선언시 포인터로 하고 sizeof로 타입의 크기를 알아낸 후 배열길이를 곱해준다.
+
+	for (int i = length-1; i >= 0; i--) {
+		a[i] = i;
+		if (i == length) {
+			printf("배열값은 ");
+		}
+		printf("\t%d", a[i]);
+	}
+	free(a);
+	printf("\n");
+	//while (1);
+	system("pause");
+}
