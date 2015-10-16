@@ -1,0 +1,68 @@
+/*
+@15.10.16   #include<cctype> 에 대해 알아보기 위하여 작성.
+@나중에 알게 된 사실이지만  #include<cctype>가 없어도 작동되는걸 보니 iostream에서 지원해주거나
+비주얼스튜디오2015가 성능이 뛰어나서 그런것으로 예상된다.
+
+@isdigit()에서 생각보다 너무오래걸렸는데 변수타입이char형이어야 제대로 작동됬다. 
+당연히 int형일거라 생각하고 계속 했는데 아니었다.
+
+@stringstream, atoi 두개도 따로 공부해봐야될것같습니다.
+@지금 공부한걸로 string입력했을 때 문자, 숫자 알아내는 방법 만들때 사용하려 합니다.
+*/
+
+#include<iostream>
+#include<cctype>		cctype를 테스트하려고했는데 주석처리해도 돌아간다.
+using namespace std;
+void test(char a, char b, int c, int d);
+int main() {
+	char a, b;
+	int c, d;
+	a = 'a';
+	b = 'B';
+	c = 10;
+	d = 8;
+	char e = '9';
+	cout << "숫자인지 판별 : " << isdigit(d) << endl;
+	cout << "숫자인지 판별 : " << isdigit(2) << endl;
+	cout << "숫자인지 판별 : " << isdigit(5) << endl;
+	cout << "숫자인지 판별 : " << isdigit(e) << endl;
+	cout << "숫자인지 판별 : " << isdigit('0') << endl;
+	cout << "왜!!!" << endl;
+	test(a, b, c, d);
+
+	
+	system("pause");
+	return 0;
+}
+void test(char a, char b, int c, int d) {
+	int q = 3;
+	cout << "isalpha()테스트" << endl;
+	cout << "알파벳인지 판별 : " << isalpha(a) << endl;
+	cout << "알파벳인지 판별 : " << isalpha(b) << endl;
+	cout << "알파벳인지 판별 : " << isalpha(c) << endl;
+	cout << "알파벳인지 판별 : " << isalpha(65) << endl;	//아스키코드 65가 A라서 
+	cout << "알파벳인지 판별 : " << isalpha('Y') << endl;
+	cout << "알파벳인지 판별 : " << isalpha('y') << endl << endl;
+	// 소문자 2 대문자 1을 반환하고  숫자 아니면 0반환.
+
+	cout << "isdigit()테스트" << endl;
+	cout << "숫자인지 판별 : " << isdigit(10) << endl;
+	cout << "숫자인지 판별 : " << isdigit(a) << endl;
+	cout << "숫자인지 판별 : " << isdigit(b) << endl;
+	cout << "숫자인지 판별 : " << isdigit(c) << endl;
+	cout << "숫자인지 판별 : " << isdigit(d) << endl;
+	cout << "숫자인지 판별 : " << isdigit('Y') << endl;
+	cout << "숫자인지 판별 : " << isdigit('y') << endl;
+	cout << "숫자인지 판별 : " << isdigit((char)'100') << endl;
+	cout << "숫자인지 판별 : " << isdigit((char)'39') << endl;
+	cout << "@@" << (char)isdigit(q) << endl;
+	cout << "숫자인지 판별 : " << isdigit('0') << endl<<endl;	//이거만 제대로 나온다.
+	//isdigit를 사용하려면 변수타입이 char이어야하고 자리수가 2자리(ex 28, 10, 232)를 넘어가면 안되고
+	//무조건 1자리여야한다.(2자리라면 배열을 나눠서 검사하면 될 것 같다.
+
+	cout << toupper('a') << endl;		//이러면 아스키코드로 출력
+	cout << (char)toupper('a') << endl;		//소문자 -> 대문자 변경
+	cout << (char)toupper(a) << endl;		// 위랑같다.
+	cout << (char)tolower(b) << endl;		//대문자 -> 소문자 변경
+
+}
