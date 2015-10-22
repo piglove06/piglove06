@@ -1,0 +1,132 @@
+/* 
+	15.10.22일    #include<cstring> 연습
+	18:00 시작. 20:00 끝  
+
+1. 밑에8개를 활용해볼 예정입니다. 하다보니까 cstring헤더파일 공부하는 게 아니고 char형과 string의 차이점을 알아가는 것 같습니다...
+
+2. strlen(문자열길이), strcpy(문자열 복사), strncpy( 문자열 길이만큼 복사), strcmp(문자열 비교), strcnmp(문자열 길이만큼 비교)
+	strcat(문자열 뒤에 추가), strncat(문자열뒤에 범위줘서 추가), strchr (문자열 처음위치 주소)
+
+3. strcpy ->  strcpy_s  이렇게 바꿔야되는데 안바꿔서 시간낭비가 심했습니다.
+
+4. 점점 하다보니 string, char형의 차이점을 공부하게 됩니다. c++ 공부하면서 느끼는게 
+생각하던거보다 의외로 엉뚱한데서 막히고 여기서 공부가 되는 것 같습니다.
+
+
+5. cin.getline() = char형 배열만 사용 가능.         cin.getline(cstr, 배열길이);		#include<iostream>에 정의
+
+6. getline() =  string형, file입출력에 사용,       getline(inf,str1); //파일 입출력,  getline(cin,str2); //표준 입출력
+	#include<iostream>에 정의
+
+7. get() = 문자 1개만 입력가능, 공백도 입력가능하다.(스페이스, 엔터), 엔터로 입력받는기능 마무리.(cin은 띄어쓰기나 엔터)
+
+
+8. stl, mfc
+하다보니 #include<cstring>, #include<string> 의 차이를 알고싶었는데
+처음에 공부할땐 cstring처럼 앞에 c가 붙으면 c++표준에 맞춰진거라고 들었는데 표준에 맞춰졌는데 왜 getline은 
+누구는 되고 누구는 안되지? 라는 궁금증에 좀더 파고드니 cstring는 MFC계열의 라이브러리?   
+string는 STL계열의 라이브러리. 이렇게 나오고 
+STL계열이 c++표준이고 MFC는 표준은 아니고 STL보다 좀더 넓은 범위? 유용한게 추가된 라이브러리? 자세히는 모르겠습니다.  
+STL, MFC는 아직까지는 몰라도 될것같은데 나중되면 여기서 뭔가 막힐 것 같은 느낌입니다.
+string 은 C언어스타일에 가깝고, CString은 C++언어스타일에 가까운 것이 아닌지요~!?
+
+getline출처: http://arer.tistory.com/29
+STL관련글 출처: https://kldp.org/node/67782 ,  http://www.devpia.com/MAEUL/Contents/Detail.aspx?BoardID=50&MAEULNo=20&no=697293&ref=697290
+*/
+
+
+
+#include<iostream>
+#include<cstring>
+#include<string>
+using namespace std;
+
+int main() {
+	const int input_length = 30;
+
+	string str1 = "change string";
+	string str2 = "string 내용";
+	string input_str;
+
+	char input_ch2[] = "change char";
+	char input_ch3[] = " + char배열 내용";
+	char input_ch[input_length];
+	
+	
+
+	cout << "string형 문자열 입력해주세요 : ";
+	getline(cin, input_str);
+	cout << "char형 문자열 입력해주세요 : ";
+	cin.getline(input_ch, 20);
+	cout << endl;
+	//cin을 사용하려 했는데 띄어쓰기를 입력못받아서 getline사용하였습니다.
+
+		cout << "string 입력한 문자열은    \"" << input_str << "\" 입니다." << endl;
+		cout << "char배열  입력한 문자열은 \"" << input_ch << "\" 입니다." << endl;		//입력한 문자열 출력
+
+		cout << "string 입력한 문자열의 길이는   : " << input_str.length() << endl;
+		cout << "char배열 입력한 문자열의 길이는 : " << strlen(input_ch) << endl<<endl;			//문자열 길이 출력.
+
+	//길이구하기
+	//string형 : string변수명.length()
+	//char배열 : strlen(char형 변수명
+	
+	strcpy_s(input_ch, input_ch2);
+	input_str = str1;
+
+		cout << "string 문자열 복사  : \"" << input_str << "\" 입니다." << endl;
+		cout << "char배열 문자열복사 : \"" << input_ch << "\" 입니다." << endl << endl;;	//문자열 복사.
+
+		
+	//복사하기
+	//string형 : 변수 = 바꿀변수
+	//char배열 : strcpy_s(바뀔자리, 바꿀내용);
+	if (strcmp(input_ch, input_ch2) == 0) {		//두개의 문자열이 같을 때
+		cout << "char 배열 문자열 두개는 같다." << endl;
+	}
+	else if (strcmp(input_ch, input_ch2) > 0) {	//문자열 다를 때
+		cout << "char 배열 input이 더 길다.." << endl;
+	}
+	else if (strcmp(input_ch, input_ch2) < 0) {
+		cout << "char 배열 문자열 input_ch2가 더 길다." << endl;
+	}
+	else {
+		cout << "에러!" << endl;
+		exit(1);
+	}
+
+	if (input_str.compare(str1) == 0) {
+		cout << "string 문자열 두개는 같다." << endl;
+	}
+	else if (input_str.compare(str1) < 0) {
+		cout << "string 문자열 input_str이 더 길다.." << endl;
+	}
+	else if (input_str.compare(str1) > 0) {
+		cout << "string 문자열 input_str이 더 길다." << endl;
+	}
+	else {
+		cout << "에러!" << endl;
+		exit(1);
+	}
+
+	cout << endl;
+	//문자열 비교
+	//string형 : 변수 = input_str.compare(str1)
+	//char배열 : strcpy_s(바뀔자리, 바꿀내용);
+	strcat_s(input_ch, " + add");
+	input_str += " + add";
+
+		cout << "string 문자열뒤에 추가       : \"" << input_str << "\" 입니다." << endl;
+		cout << "char배열 문자열복사뒤에 추가 : \"" << input_ch << "\" 입니다." << endl << endl;;
+	
+	str2 += string(input_ch3);
+
+		cout << "string, char배열 합치기 : " << str2 << endl;
+
+	
+
+	system("pause");
+	return 0;
+}
+
+
