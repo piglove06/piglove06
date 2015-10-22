@@ -1,0 +1,55 @@
+//배열주소받아서 배열출력하는 두번째 fn 다시보고 공부하기. (만들긴 만들었는데 아직 이해가 잘 안된다.
+// 전혀 효율적이진 않지만 함수오버로딩 연습해볼겸 같은이름인 fn사용하기.
+
+#include<iostream>
+#include<cstring>
+using namespace std;
+int fn(int *, int *);
+void fn(int *, int );
+int main() {
+	int x = 10;
+	int y = 20;
+	int temp;
+	int arr[] = { 1, 2, 3, 4, 5 };
+	int *p1, *p2, *p3;
+	int **pp1;
+	int length;
+	temp = fn(&x, &y);
+	cout << temp << endl;
+
+	length = sizeof(arr) / 4;
+//	cout << "length : " << length << endl;
+//	fn(&arr[0], length);	아래꺼랑 같은 내용인데 이해가 잘 안된다.
+	fn(arr, length);
+
+	/*		@@ 다시 공부하기.
+	p1 = &x;
+	cout << p1 << endl;
+	p1 = &x;
+	pp1 = &p1;
+	cout << *p1 << endl;
+	cout << *pp1 << endl;
+	cout << **pp1 << endl;
+	*/
+	system("pause");
+	return 0;
+}
+
+int fn(int *x, int *y) {		//포인터 함수 사용1   끝.
+	int result;
+	result = *x + *y;
+	return result;
+}
+void fn(int *address, int length) {		// 배열 주소받아서 그 주소값에 1씩 더해서 char 배열내용 출력하기.
+	
+	int *temp;
+	for (int i = 0; i < length; i++) {
+		temp = address + i;
+		cout << *temp << endl;
+	}
+	
+//	cout << &arr << endl;
+	
+
+	
+}
