@@ -37,7 +37,7 @@ int main()
 	for (int i = 0; i < input; i++) {				
 		cout << "a[" << i << "] = " << a[i] << endl;
 	}
-	free(a);
+	delete[] a;
 	system("pause");
 	return 0;
 }
@@ -95,7 +95,7 @@ int main()
 		for (int i = 0; i < input; i++) {
 			cout << "배열안에 넣을 숫자 :";
 			cin >> input2;
-			a[i] = input2;
+		f	a[i] = input2;
 			cout << a[i] << endl;
 		}
 	}
