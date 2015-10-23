@@ -1,0 +1,113 @@
+/*
+15.10.23 함수포인터, 배열 동적할당,  내용 최대한 함수로 만들기.
+
+원래는 포인터쪽을 공부하다 함수포인터보다가 하다보니 전혀 이상한걸 만들고 있었습니다... 포인터쪽은 나중에 해보려 합니다.
+금방끝날것같아서 시간은 안적었는데 1~2시간은 걸린것같습니다. 
+코딩하면서 느끼는건 아직까진 메인에 전부 넣으면 편한데 이걸 함수로 만들면 많이 버벅거리고 시간이 오래걸립니다.
+오늘은 조금 시간이 여유로워서 최대한 함수로 빼서 메인내용을 간단하게 만들어보려고 했습니다.
+배열을 그저께도 사용하였는데 약간 다르게 해서 사용하는데 어려워진 느낌입니다.
+함수로 따로 빼는데 시간이 오래 걸렸습니다.
+
+@ 이렇게 동적할당하는거보다 vector을 하면 훨씬 효율적일것같은데 vector은 많이 안써봐서 나중에 해보려고 합니다. 
+*/
+#include <iostream>
+#include <algorithm>
+
+using namespace std;
+
+void fn1(int *a, int length);
+void fn2(int *a, int length);
+int main()
+{
+	int input;
+	int *a;
+
+	void(*pfn)(int *, int);		//함수포인터 연습용으로 사용.
+
+	cout << "동적할당 길이 입력 : ";
+	cin >> input;
+
+	a = new(nothrow) int[input];	//메모리할당 실패했을 경우 null반환
+
+	pfn = fn1;
+	pfn(a, input);			//함수포인터 사용.
+	
+	sort(a, a + input);		//정렬
+
+	for (int i = 0; i < input; i++) {				
+		cout << "a[" << i << "] = " << a[i] << endl;
+	}
+	free(a);
+	system("pause");
+	return 0;
+}
+void fn1(int *a, int length) {		//메모리할당 실패하면 강제종료,
+	if (a == nullptr) {
+		cout << "Error" << endl;
+		exit(1);
+	}
+	else {							//할당 성공하면fn2함수로 cin실행
+		fn2(a, length);
+	}
+}
+
+void fn2(int *a, int length) {
+	int input2;
+
+	for (int i = 0; i < length; i++) {
+		cout << "배열안에 넣을 숫자 입력:";
+		cin >> input2;
+		a[i] = input2;
+	//		cout << a[i] << endl;
+	}
+}
+
+
+
+
+
+/*
+
+//메인에 전부 박은 프로그램.
+#include <iostream>
+#include <algorithm>
+using namespace std;
+
+void fn1(int *a, int length); 
+void fn2(int *a, int length);
+int main()
+{
+	int input;
+	int input2;
+	int *a;
+
+	cout << "동적할당 길이 입력 : ";
+	cin >> input;
+
+	a = new(nothrow) int[input];
+
+	if (a == nullptr) {
+		cout << "Error" << endl;
+		exit(1);
+	}
+
+	else {
+		for (int i = 0; i < input; i++) {
+			cout << "배열안에 넣을 숫자 :";
+			cin >> input2;
+			a[i] = input2;
+			cout << a[i] << endl;
+		}
+	}
+
+	sort(a, a + input);
+
+	for (int i = 0; i < input; i++) {
+		cout << "a[" << i << "] = " << a[i] << endl;
+	}
+
+	system("pause");
+	return 0;
+}
+
+*/
